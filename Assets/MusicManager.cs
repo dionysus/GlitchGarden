@@ -12,15 +12,13 @@ public class MusicManager : MonoBehaviour {
 	void Awake () {
 
 		DontDestroyOnLoad (gameObject);
-		Debug.Log ("Don't Destroy onLoad: " + name);
+		audioSource = GetComponent<AudioSource> ();
 
 	}
 
 	void Start () {
 
-		audioSource = GetComponent<AudioSource> ();
 
-		if (audioSource){ Debug.Log ("audioSource was found");}
 	}
 
 	void OnEnable()
@@ -31,20 +29,17 @@ public class MusicManager : MonoBehaviour {
 
 	void OnDisable()
 	{
-		//Tell our 'OnLevelFinishedLoading' function to stop listening for a scene change as soon as this script is disabled. Remember to always have an unsubscription for every delegate you subscribe to!
+		//Tell our 'OnLevelFinishedLoading' function to stop listening for a scene change as soon as this script is disabled. 
+		//Remember to always have an unsubscription for every delegate you subscribe to!
 		SceneManager.sceneLoaded -= OnLevelFinishedLoading;
 	}
 
 	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
 	{
-		Debug.Log(scene.buildIndex);
+		//Debug.Log(scene.buildIndex);
 
 		int levelIndex = scene.buildIndex;
 		AudioClip thisLevelMusic = levelMusicChangeArray[levelIndex];
-
-		if (thisLevelMusic){ Debug.Log ("thisLevelMusic was found");}
-		else{ Debug.Log ("thisLevelMusic was not found");}
-
 
 		if (thisLevelMusic) { //if music is attached
 			audioSource.clip = thisLevelMusic;
