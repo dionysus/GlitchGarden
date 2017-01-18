@@ -27,21 +27,16 @@ public class FadeIn : MonoBehaviour {
 		if (Time.timeSinceLevelLoad < fadeInTime) {
 
 			// fade in
-
 			float alphaChange = (Time.deltaTime / fadeInTime);
 
 			currentColor.a -= alphaChange;
 			fadePanel.color = currentColor;
-			Debug.Log (Time.deltaTime);
-
 
 		} else {
 
 			// deactivate panel
-
 			gameObject.SetActive (false);
 
 		}
-
 	}
 }

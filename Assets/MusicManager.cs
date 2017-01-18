@@ -19,6 +19,7 @@ public class MusicManager : MonoBehaviour {
 	void Start () {
 
 
+
 	}
 
 	void OnEnable()
