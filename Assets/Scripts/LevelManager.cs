@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour {
 
 	void Start(){
 
-		if (autoLoadNextLevelAfter <= 0) { // prevents autoload if 0
+		if (autoLoadNextLevelAfter > 0) { // prevents autoload if 0
 			Invoke ("LoadNextLevel", autoLoadNextLevelAfter);
 		}
 	}
