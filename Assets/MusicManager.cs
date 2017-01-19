@@ -16,28 +16,14 @@ public class MusicManager : MonoBehaviour {
 
 	}
 
-	void Start () {
-
-
+	void Update () {
 
 	}
 
-	void OnEnable()
-	{
-		//Tell our 'OnLevelFinishedLoading' function to start listening for a scene change as soon as this script is enabled.
-		SceneManager.sceneLoaded += OnLevelFinishedLoading;
-	}
+	void OnEnable(){SceneManager.sceneLoaded += OnLevelFinishedLoading;}
+	void OnDisable(){SceneManager.sceneLoaded -= OnLevelFinishedLoading;}
 
-	void OnDisable()
-	{
-		//Tell our 'OnLevelFinishedLoading' function to stop listening for a scene change as soon as this script is disabled. 
-		//Remember to always have an unsubscription for every delegate you subscribe to!
-		SceneManager.sceneLoaded -= OnLevelFinishedLoading;
-	}
-
-	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
-	{
-		//Debug.Log(scene.buildIndex);
+	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode){
 
 		int levelIndex = scene.buildIndex;
 		AudioClip thisLevelMusic = levelMusicChangeArray[levelIndex];
@@ -47,7 +33,11 @@ public class MusicManager : MonoBehaviour {
 			audioSource.loop = true;
 			audioSource.Play();
 		}
+	}
 
+	public void SetVolume (float volume){
+
+		audioSource.volume = volume;
 
 	}
 

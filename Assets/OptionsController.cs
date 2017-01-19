@@ -14,10 +14,16 @@ public class OptionsController : MonoBehaviour {
 	void Start () {
 
 		musicManager = GameObject.FindObjectOfType<MusicManager> ();
-		Debug.Log (musicManager);
 
 		UpdateSliders ();
 
+	}
+
+	void Update (){
+
+		if (musicManager) {
+			musicManager.SetVolume (volumeSlider.value);
+		}
 	}
 
 	public void SaveSettings (){
@@ -30,15 +36,16 @@ public class OptionsController : MonoBehaviour {
 
 	}
 
-	public void DefaultSettings (){
+	public void SetDefault (){
 
 		PlayerPrefsManager.SetMasterVolume (0.5f);
-		PlayerPrefsManager.SetDifficulty (0.5f);
+		PlayerPrefsManager.SetDifficulty (1);
 		UpdateSliders ();
 
 	}
 
 	public void UpdateSliders (){
+		
 		volumeSlider.value = PlayerPrefsManager.GetMasterVolume ();
 		difficultySlider.value = PlayerPrefsManager.GetDifficulty ();
 	}
