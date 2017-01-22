@@ -22,7 +22,7 @@ public class Shooter : MonoBehaviour {
 
 	private void Fire (){
 
-		GameObject newProjectile = Object.Instantiate (projectileType, projectileSpawn.transform.position, Quaternion.identity, projectileParent.transform);
+		Object.Instantiate (projectileType, projectileSpawn.transform.position, Quaternion.identity, projectileParent.transform);
 	
 	}
 }
