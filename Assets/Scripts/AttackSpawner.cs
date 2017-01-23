@@ -47,11 +47,7 @@ public class AttackSpawner : MonoBehaviour {
 			return false;
 		}
 	}
-
-
-	public void OnDrawGizmos(){
-		Gizmos.DrawWireCube(transform.position, new Vector3 (0.5f, 0.5f));
-	}
+		
 		
 	void Spawn (GameObject myGameObject){
 

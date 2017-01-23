@@ -15,9 +15,9 @@ public class Button : MonoBehaviour {
 	void Start () {
 
 		buttonSprite = GetComponentInChildren<SpriteRenderer>();
-		buttonSprite.color = Color.black;
+		//buttonSprite.color = Color.black;
 		buttonArray = GameObject.FindObjectsOfType<Button> ();
-
+		AllButtonsUpdate ();
 	}
 
 	// Update is called once per frame
@@ -27,14 +27,31 @@ public class Button : MonoBehaviour {
 
 	void OnMouseDown (){
 
-		foreach (Button thisButton in buttonArray) {
-			thisButton.GetComponentInChildren<SpriteRenderer>().color = Color.black;
-		}
+		AllButtonsUpdate ();
 
-		buttonSprite.color = Color.white;
+		int defenderCost = defenderPrefab.GetComponent<Defender> ().cloudCost;
+
+		if (defenderCost < CloudDisplay.cloudCount) {
+			buttonSprite.color = Color.white;
+		} else {
+			buttonSprite.color = Color.black;
+		}
 
 		selectedDefender = defenderPrefab;
 
 	}
 
+	public void AllButtonsUpdate (){
+
+		foreach (Button thisButton in buttonArray) {
+
+			int defenderCost = thisButton.defenderPrefab.GetComponent<Defender> ().cloudCost;
+
+			if (defenderCost < CloudDisplay.cloudCount) {
+				thisButton.GetComponentInChildren<SpriteRenderer> ().color = Color.grey;
+			} else {
+				thisButton.GetComponentInChildren<SpriteRenderer> ().color = Color.black;
+			}
+		}
+	}
 }

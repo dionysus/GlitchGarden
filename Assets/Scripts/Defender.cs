@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class Defender : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public int cloudCost = 100;
+
+	private CloudDisplay cloudDisplay;
+
+	void Start (){
+
+		cloudDisplay = GameObject.FindObjectOfType<CloudDisplay> ();
+
 	}
 
-	void OnTriggerEnter2D(){//Collision2D col
-		
+	public void AddCloud(int amount){
+		cloudDisplay.AddClouds (amount);
 	}
+
+
+
 }

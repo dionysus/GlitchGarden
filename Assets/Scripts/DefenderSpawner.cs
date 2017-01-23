@@ -8,12 +8,13 @@ public class DefenderSpawner : MonoBehaviour {
 	public Camera myCamera;
 
 	private GameObject defenderParent;
-
+	private CloudDisplay cloudDisplay;
 
 	void Start (){
 
 		// find/create projectiles folder for spawned projectiles
 		defenderParent = GameObject.Find ("Defenders");
+		cloudDisplay = GameObject.FindObjectOfType<CloudDisplay>();
 
 		if (!defenderParent) {
 			defenderParent = new GameObject("Defenders");
@@ -26,8 +27,15 @@ public class DefenderSpawner : MonoBehaviour {
 		Vector2 rawPos = CalculateWorldPointMouse ();
 		Vector2 roundedPos = SnapToGrid (rawPos);
 
-		Object.Instantiate (Button.selectedDefender, roundedPos, Quaternion.identity, defenderParent.transform);
+		GameObject selectedDefender = Button.selectedDefender;
 
+		int defenderCost = selectedDefender.GetComponent<Defender> ().cloudCost;
+
+		if (cloudDisplay.UseStars (defenderCost) == CloudDisplay.Status.SUCCESS) { //enum success?
+			Object.Instantiate (Button.selectedDefender, roundedPos, Quaternion.identity, defenderParent.transform);
+		} else {
+			Debug.Log ("Not enough Clouds");
+		}
 	}
 
 	Vector2 CalculateWorldPointMouse (){
