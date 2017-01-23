@@ -6,7 +6,7 @@ public class Attacker : MonoBehaviour {
 
 	//PUBLICS
 
-	public float screenMin = -2f;
+	public float screenMin = -3f;
 
 	[Tooltip ("Average number of seconds between appearances")]
 	public float seenEverySeconds;
@@ -17,8 +17,6 @@ public class Attacker : MonoBehaviour {
 	private GameObject currentTarget;
 	private Health enemyHealth;
 	private Animator animator;
-
-
 
 	// Use this for initialization
 	void Start () {
