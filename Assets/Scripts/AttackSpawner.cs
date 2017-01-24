@@ -27,7 +27,7 @@ public class AttackSpawner : MonoBehaviour {
 		Attacker attacker = attackerGameObject.GetComponent<Attacker>();
 
 		float meanSpawnDelay = attacker.seenEverySeconds;
-		float spawnsPerSecond = 1 / meanSpawnDelay;
+		float spawnsPerSecond = 1 / meanSpawnDelay * PlayerPrefsManager.GetDifficulty();
 
 		if (Time.deltaTime > meanSpawnDelay) { 
 			Debug.LogWarning ("Spawn rate capped by frame rate");
@@ -41,11 +41,8 @@ public class AttackSpawner : MonoBehaviour {
 		// Random.value generates random b/w 0 to 1
 		// when random.value is less than the increasing delta.time
 
-		if (Random.value < threshold) {
-			return true;
-		} else {
-			return false;
-		}
+		return (Random.value < threshold);
+
 	}
 		
 		

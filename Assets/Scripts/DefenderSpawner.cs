@@ -12,9 +12,11 @@ public class DefenderSpawner : MonoBehaviour {
 
 	void Start (){
 
+		// attach references
+		cloudDisplay = GameObject.FindObjectOfType<CloudDisplay>();
+
 		// find/create projectiles folder for spawned projectiles
 		defenderParent = GameObject.Find ("Defenders");
-		cloudDisplay = GameObject.FindObjectOfType<CloudDisplay>();
 
 		if (!defenderParent) {
 			defenderParent = new GameObject("Defenders");

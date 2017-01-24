@@ -6,7 +6,7 @@ public class Attacker : MonoBehaviour {
 
 	//PUBLICS
 
-	public float screenMin = -3f;
+	private float screenMin = 0f;
 
 	[Tooltip ("Average number of seconds between appearances")]
 	public float seenEverySeconds;
@@ -17,26 +17,37 @@ public class Attacker : MonoBehaviour {
 	private GameObject currentTarget;
 	private Health enemyHealth;
 	private Animator animator;
+	private LosePanel losePanel;
 
-	// Use this for initialization
 	void Start () {
+
+		//define variables
+
+
+		//attach references
+		losePanel = GameObject.FindObjectOfType<LosePanel>();
+		animator = GetComponent<Animator> ();
 
 		// add kinematic rigidbody2D
 		Rigidbody2D myRigidbody = gameObject.AddComponent<Rigidbody2D> ();
 		myRigidbody.isKinematic = true;
 
-		animator = GetComponent<Animator> ();
+
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
+		
 		transform.Translate (Vector3.left * currentSpeed * Time.deltaTime);
 
 		if (!currentTarget) {
 			animator.SetBool ("isAttacking", false);
 		}
 
-		if (transform.position.x <= screenMin){ Destroy (gameObject);}
+		if (transform.position.x <= screenMin){
+			losePanel.LoseAnimation ();
+		}
+
 	}
 		
 	// called from animator at time of strike
@@ -47,7 +58,12 @@ public class Attacker : MonoBehaviour {
 
 			if (enemyHealth) {
 				enemyHealth.DealDamage (damage);
-			
+
+				if (currentTarget.GetComponent<Grave> ()) { 
+					currentTarget.GetComponent<Grave> ().ShakeShake ();
+
+				}
+
 			} 
 		} 
 	}
@@ -64,6 +80,5 @@ public class Attacker : MonoBehaviour {
 		currentSpeed = speed;
 
 	}
-		
 
 }

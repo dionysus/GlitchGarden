@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Grave : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+
+	public void ShakeShake(){
+
+		GetComponent<Animator> ().SetTrigger ("underAttack");
+
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+
 }

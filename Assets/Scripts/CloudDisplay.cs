@@ -21,17 +21,13 @@ public class CloudDisplay : MonoBehaviour {
 		updateCloudCount ();
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void AddClouds (int amount){
 		Debug.Log (amount + " stars added to display");
 
 		cloudCount += amount;
 		updateCloudCount ();
+		button.AllButtonsUpdate ();
 
 	}
 

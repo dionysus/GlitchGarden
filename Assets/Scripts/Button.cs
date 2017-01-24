@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Button : MonoBehaviour {
 
@@ -8,14 +9,19 @@ public class Button : MonoBehaviour {
 	public static GameObject selectedDefender;
 	public GameObject defenderPrefab;
 
+	private Text text;
 	private SpriteRenderer buttonSprite;
 	private Button[] buttonArray;
+	private int defenderCost;
 
 	// Use this for initialization
 	void Start () {
 
 		buttonSprite = GetComponentInChildren<SpriteRenderer>();
-		//buttonSprite.color = Color.black;
+
+		defenderCost = defenderPrefab.GetComponent<Defender> ().cloudCost;
+		GetComponentInChildren<Text> ().text = defenderCost.ToString ();
+
 		buttonArray = GameObject.FindObjectsOfType<Button> ();
 		AllButtonsUpdate ();
 	}
@@ -28,8 +34,6 @@ public class Button : MonoBehaviour {
 	void OnMouseDown (){
 
 		AllButtonsUpdate ();
-
-		int defenderCost = defenderPrefab.GetComponent<Defender> ().cloudCost;
 
 		if (defenderCost < CloudDisplay.cloudCount) {
 			buttonSprite.color = Color.white;
